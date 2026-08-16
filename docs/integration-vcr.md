@@ -29,8 +29,9 @@ HarnessBench's zero-third-party-dependency core. `vcr-core` is declared as the o
 extra; only VCR *validation* (not emission) pulls `jsonschema`.
 
 ```bash
-# with vcr-core importable (path/vendored/published):
-PYTHONPATH=.:../vcr-core uvx pytest tests/test_vcr_emit.py
+# install the optional extra (pulls vcr-core from PyPI), then run the emission tests:
+pip install -e ".[vcr]"
+pytest tests/test_vcr_emit.py
 ```
 
 ## Boundary note

@@ -55,4 +55,4 @@ def test_advised_and_declined_map_correctly():
 
 def test_schema_loads_without_jsonschema():
     # vcr-core's schema is readable as data even where jsonschema (the validator) is absent.
-    assert base_schema()["$id"].endswith("/vcr/v0")
+    assert base_schema()["$id"].endswith("/vcr/v0.1")
