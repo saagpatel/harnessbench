@@ -21,6 +21,7 @@ def load_corpus(path: str | Path) -> Corpus:
         harness=data["harness"],
         version=str(data["version"]),
         notes=data.get("notes", ""),
+        threat_class=data.get("threat_class", ""),
         probes=probes,
     )
 

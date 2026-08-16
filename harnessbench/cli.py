@@ -16,21 +16,31 @@ from pathlib import Path
 
 from . import report
 from .corpus import load_corpus, validate_corpus
-from .runner_hook import load_subject, run_subject
+from .runner_hook import config_sha256, load_subject, run_subject
 from .score import ScoreSummary, score_subject
 
 SCHEMA = "harnessbench-report/v1"
 EVIDENCE_TIER = "offline-hook-mechanism"
 
 
-def _report(corpus_name, corpus_version, owasp, summary: ScoreSummary, date: str | None) -> dict:
+def _report(
+    corpus_name,
+    corpus_version,
+    owasp,
+    summary: ScoreSummary,
+    date: str | None,
+    threat_class: str,
+    config_ref: str,
+) -> dict:
     return {
         "schema": SCHEMA,
         "subject": summary.subject,
+        "config_sha256": config_ref,
         "harness": "claude-code",
         "corpus": corpus_name,
         "corpus_version": corpus_version,
         "owasp": owasp,
+        "threat_class": threat_class,
         "evidence_tier": EVIDENCE_TIER,
         "generated_date": date,
         "ees": summary.ees,
@@ -81,7 +91,15 @@ def _run(args: argparse.Namespace) -> int:
     )
 
     if args.out:
-        report = _report(corpus.name, corpus.version, corpus.owasp, summary, args.date)
+        report = _report(
+            corpus.name,
+            corpus.version,
+            corpus.owasp,
+            summary,
+            args.date,
+            corpus.threat_class,
+            config_sha256(args.subject),
+        )
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

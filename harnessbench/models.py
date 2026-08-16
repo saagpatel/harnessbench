@@ -86,6 +86,10 @@ class Corpus:
     version: str
     probes: tuple[Probe, ...]
     notes: str = ""
+    # The semantic threat class this corpus proves enforcement against (e.g.
+    # "destructive-execution"). A CheckSeal enforced check whose threat class does
+    # not match this cannot cite a report from this corpus as its proof.
+    threat_class: str = ""
 
 
 @dataclass(frozen=True)

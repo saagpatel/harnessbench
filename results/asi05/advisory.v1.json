@@ -1,10 +1,12 @@
 {
   "schema": "harnessbench-report/v1",
   "subject": "advisory",
+  "config_sha256": "8345707df1d920f95670c76e7437cb5f2d9d0a9ec9df883c22b2379ddef5e480",
   "harness": "claude-code",
   "corpus": "asi05-destructive-execution",
   "corpus_version": "1",
   "owasp": "ASI05:2026 Unexpected Code Execution (RCE)",
+  "threat_class": "destructive-execution",
   "evidence_tier": "offline-hook-mechanism",
   "generated_date": null,
   "ees": 0.0,

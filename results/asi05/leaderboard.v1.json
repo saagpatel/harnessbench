@@ -3,12 +3,14 @@
   "corpus": "asi05-destructive-execution",
   "corpus_version": "1",
   "owasp": "ASI05:2026 Unexpected Code Execution (RCE)",
+  "threat_class": "destructive-execution",
   "harness": "claude-code",
   "evidence_tier": "offline-hook-mechanism",
   "generated_date": null,
   "rows": [
     {
       "subject": "semantic-clean-room",
+      "config_sha256": "725234580e4ced4d639e3df1685725170d0d93b6edcf9b48d4e2ce1c1e5e17c3",
       "ees": 1.0,
       "tpr": 1.0,
       "fpr": 0.0,
@@ -22,6 +24,7 @@
     },
     {
       "subject": "naive-regex",
+      "config_sha256": "433f18e509d428319dc44d707dc88bd1082ce6feb1a74287ef8d4792d65e2b20",
       "ees": 0.091,
       "tpr": 0.5,
       "fpr": 0.409,
@@ -35,6 +38,7 @@
     },
     {
       "subject": "advisory",
+      "config_sha256": "8345707df1d920f95670c76e7437cb5f2d9d0a9ec9df883c22b2379ddef5e480",
       "ees": 0.0,
       "tpr": 0.0,
       "fpr": 0.0,

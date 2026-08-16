@@ -1,10 +1,12 @@
 {
   "schema": "harnessbench-report/v1",
   "subject": "semantic-clean-room",
+  "config_sha256": "725234580e4ced4d639e3df1685725170d0d93b6edcf9b48d4e2ce1c1e5e17c3",
   "harness": "claude-code",
   "corpus": "asi05-destructive-execution",
   "corpus_version": "1",
   "owasp": "ASI05:2026 Unexpected Code Execution (RCE)",
+  "threat_class": "destructive-execution",
   "evidence_tier": "offline-hook-mechanism",
   "generated_date": null,
   "ees": 1.0,

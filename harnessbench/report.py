@@ -16,6 +16,7 @@ def _row_from_report(rep: dict) -> dict:
     v = rep["verdicts"]
     return {
         "subject": rep["subject"],
+        "config_sha256": rep.get("config_sha256"),
         "ees": rep["ees"],
         "tpr": rep["tpr"],
         "fpr": rep["fpr"],
@@ -50,6 +51,7 @@ def build_leaderboard(reports: list[dict], date: str | None = None) -> dict:
         "corpus": first["corpus"],
         "corpus_version": first["corpus_version"],
         "owasp": first["owasp"],
+        "threat_class": first.get("threat_class"),
         "harness": first["harness"],
         "evidence_tier": first["evidence_tier"],
         "generated_date": date,

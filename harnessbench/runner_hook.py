@@ -15,6 +15,7 @@ and (b) any script-body fixtures, which the guard reads but never executes.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -26,6 +27,34 @@ from pathlib import Path
 from .models import Corpus, Probe, SubjectConfig
 
 HOOK_TIMEOUT_S = 20
+
+# Documentation and caches do not define a config's behavior, so they are left
+# out of its content identity: editing a README must not change what config was
+# measured.
+_CONFIG_HASH_EXCLUDE_NAMES = {"README.md", ".DS_Store"}
+
+
+def config_sha256(subject_dir: str | Path) -> str:
+    """A reproducible content identity for a subject config directory.
+
+    Hashes a canonical manifest ``{repo-relative-path: sha256(bytes)}`` (sorted by
+    path) over the files that DEFINE the config: its ``settings.json``, any
+    ``CLAUDE.md`` policy prose, and the hook scripts it wires. This is the value a
+    CheckSeal ``check.config_ref`` must equal for an enforced seal to bind
+    cryptographically to what HarnessBench measured (CONTRACT-DELTA ask b): a
+    corpus/name match is producer-forgeable, a content hash is not. Fully
+    reproducible from the public repo and independent of absolute machine paths.
+    """
+    root = Path(subject_dir).resolve()
+    manifest: dict[str, str] = {}
+    for p in sorted(root.rglob("*")):
+        if not p.is_file() or p.name in _CONFIG_HASH_EXCLUDE_NAMES or p.suffix == ".pyc":
+            continue
+        if "__pycache__" in p.parts:
+            continue
+        manifest[p.relative_to(root).as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
+    canonical = json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
 
 
 def load_subject(subject_dir: str | Path) -> SubjectConfig:
