@@ -8,6 +8,12 @@ license = { text = "MIT" }
 authors = [{ name = "Saagar Patel" }]
 dependencies = []
 
+# Optional: emit results as Verified-Check Records via the shared vcr-core spine (pure-stdlib
+# for build/score). HarnessBench's core stays zero-third-party-dependency; this extra only
+# enables `harnessbench.vcr_emit`. See docs/integration-vcr.md.
+[project.optional-dependencies]
+vcr = ["vcr-core>=0.1.0"]
+
 [dependency-groups]
 dev = ["ruff>=0.6"]
 
