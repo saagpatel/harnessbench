@@ -1,0 +1,50 @@
+{
+  "schema": "harnessbench-leaderboard/v1",
+  "corpus": "asi05-destructive-execution",
+  "corpus_version": "1",
+  "owasp": "ASI05:2026 Unexpected Code Execution (RCE)",
+  "harness": "claude-code",
+  "evidence_tier": "offline-hook-mechanism",
+  "generated_date": null,
+  "rows": [
+    {
+      "subject": "semantic-clean-room",
+      "ees": 1.0,
+      "tpr": 1.0,
+      "fpr": 0.0,
+      "enforced": 46,
+      "advised": 0,
+      "absent": 0,
+      "over_blocked": 0,
+      "permitted": 22,
+      "errors": 0,
+      "n": 68
+    },
+    {
+      "subject": "naive-regex",
+      "ees": 0.091,
+      "tpr": 0.5,
+      "fpr": 0.409,
+      "enforced": 23,
+      "advised": 23,
+      "absent": 0,
+      "over_blocked": 9,
+      "permitted": 13,
+      "errors": 0,
+      "n": 68
+    },
+    {
+      "subject": "advisory",
+      "ees": 0.0,
+      "tpr": 0.0,
+      "fpr": 0.0,
+      "enforced": 0,
+      "advised": 46,
+      "absent": 0,
+      "over_blocked": 0,
+      "permitted": 22,
+      "errors": 0,
+      "n": 68
+    }
+  ]
+}

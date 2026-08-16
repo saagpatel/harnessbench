@@ -1,0 +1,22 @@
+[project]
+name = "harnessbench"
+version = "0.1.0"
+description = "A public benchmark that grades whether an agent harness's stated safety rules are mechanically enforced or merely advised."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Saagar Patel" }]
+dependencies = []
+
+[dependency-groups]
+dev = ["ruff>=0.6"]
+
+# HarnessBench runs on the standard library alone. uv manages the dev toolchain
+# only; nothing here is built or published as a wheel in v1, so uv treats the
+# tree as a workspace rather than an installable package.
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
