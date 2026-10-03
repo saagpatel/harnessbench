@@ -75,15 +75,16 @@ definitions: [`docs/methodology.md`](docs/methodology.md).
 bash scripts/reproduce.sh
 ```
 
-Deterministic, no API key, no network, nothing executed. Each probe is only
-judged by the subject's own hook, so anyone can reproduce these numbers byte for
-byte.
+Run from the repository root with Python 3.12+ and `python3` on PATH.
+Deterministic, no API key or network: probes are judged by hooks rather than
+executed. This command rewrites the committed results, table, and badge; use a
+clean disposable checkout when you only want to verify reproduction.
 
-## Running the tests
+## Verification
 
-```
-python -m unittest discover -s tests
-```
+See [verification commands and prerequisites](docs/verification.md) for
+focused dependency-free checks, the full pytest suite (including optional VCR
+coverage), lint/format checks, and the separate live-validation boundary.
 
 ## License
 
