@@ -87,8 +87,13 @@ def _extract_bash_hooks(settings: dict, subject_dir: Path) -> tuple[tuple[str, .
             continue
         for hook in group.get("hooks") or []:
             if hook.get("type") == "command" and hook.get("command"):
-                cmd = hook["command"].replace("${SUBJECT_DIR}", str(subject_dir))
-                out.append(tuple(shlex.split(cmd)))
+                # Expand after parsing so relocated paths with spaces stay one argument.
+                out.append(
+                    tuple(
+                        arg.replace("${SUBJECT_DIR}", str(subject_dir))
+                        for arg in shlex.split(hook["command"])
+                    )
+                )
     return tuple(out)
 
 
