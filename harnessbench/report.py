@@ -30,7 +30,10 @@ def _row_from_report(rep: dict) -> dict:
     }
 
 
-def load_reports(results_dir: str | Path, exclude=("leaderboard.v1.json",)) -> list[dict]:
+def load_reports(
+    results_dir: str | Path, exclude=("leaderboard.v1.json", "core-guard.v1.json")
+) -> list[dict]:
+    # The core-guard proof is disclosed as circular and excluded from comparisons.
     reports = []
     for p in sorted(Path(results_dir).glob("*.v1.json")):
         if p.name in exclude:

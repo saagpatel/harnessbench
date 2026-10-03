@@ -102,6 +102,15 @@ class TestRunnerHook(unittest.TestCase):
             blocked, _ = run_probe(subj, probe())
             self.assertIs(blocked, False)
 
+    def test_relocated_subject_with_spaces_preserves_verdicts(self):
+        with tempfile.TemporaryDirectory(prefix="hb space ") as tmp:
+            for name, hook, expected in (("allow subject", ALLOW_HOOK, False),
+                                         ("deny subject", DENY_HOOK, True)):
+                with self.subTest(subject=name):
+                    subj = load_subject(make_subject(tmp, name, hook))
+                    blocked, _ = run_probe(subj, probe())
+                    self.assertIs(blocked, expected)
+
     def test_exit2_blocks(self):
         with tempfile.TemporaryDirectory() as tmp:
             subj = load_subject(make_subject(tmp, "exit2", EXIT2_HOOK))
